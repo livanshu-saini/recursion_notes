@@ -7,6 +7,7 @@ public class linearSearch {
         System.out.println(findIndex(arr, 4, 0));
         findAllIndex(arr, 4, 0);
         System.out.println(list);
+        System.out.println(findAllIndex2(arr, 4, 0));
     }
     static boolean search(int arr[],int target,int index){
         if(index == arr.length - 1){
@@ -38,15 +39,20 @@ public class linearSearch {
 
     // goal--> return the list
     //         don't take it in argument
-    static void findAllIndex2(int arr[], int target,int index){
+    static ArrayList<Integer> findAllIndex2(int arr[], int target,int index){
         ArrayList<Integer> list = new ArrayList<>();
         if(index == arr.length - 1){
-            return;
+            return list;
         }
+        // this will contain answer for that function call only
         if(arr[index] == target){
             list.add(index);
         }
-        findAllIndex(arr, target , ++index);
+
+        ArrayList<Integer> ansFromBellowCalls = findAllIndex2(arr, target , ++index);
+
+        list.addAll(ansFromBellowCalls);
+        return list;
     }
 
 
